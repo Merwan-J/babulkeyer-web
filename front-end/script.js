@@ -34,6 +34,7 @@ class App {
     helpInvolved.addEventListener("click", this.renderGetInvolveds.bind(this));
     messages.addEventListener("click", this.rendermessages.bind(this));
     testimonials.addEventListener("click", this.renderTestimonials.bind(this));
+    users.addEventListener("click", this.renderUser.bind(this));
   }
   slideDown(e) {
     if (e.target.closest(".sub-heading")) {
@@ -529,64 +530,34 @@ class App {
 
   //////////////////  message   /////////////////////////////
 
-  rendermessages(e) {
+  async rendermessages(e) {
     if (this.selectedElement) {
       this.selectedElement.classList.remove("active-item-2");
       this.selectedElement.classList.remove("active-item");
     }
     this.selectedElement = e.currentTarget;
-    const html = ` <div class="messages-box">
-    <h2> Messages </h2>
-    <div class="messages grid grid-col-2-equal">
-        <div class="message-card">
-            <p class="message-card-title "> client Name: <span class="contact-name">natty</span></p>
-            <p class="message-card-title"> client email: <span class="contact-email">natnael70a@gmail.com</span></p>
-            <p class="message-card-title">client address: <span class="contact-address">Addis Ababa University</span></p>
-            <p class="message-card-title">client subject: <span class="contact-subject"> Lorem ipsum dolor si</span></p>
-             <p class="message-card-title">
-              client statement:
-              <blockquote class="contact-statement">
-               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi molestiae doloribus, eum dignissimos similique excepturi eos non praesentium, odio corporis, quas accusamus! Quis maiores dicta magni, sapiente ea sunt tenetur?
-              </blockquote>
-            </p>
-        </div>
-        <div class="message-card">
-          <p class="message-card-title "> client Name: <span class="contact-name">natty</span></p>
-          <p class="message-card-title"> client email: <span class="contact-email">natnael70a@gmail.com</span></p>
-          <p class="message-card-title">client address: <span class="contact-address">Addis Ababa University</span></p>
-          <p class="message-card-title">client subject: <span class="contact-subject"> Lorem ipsum dolor si</span></p>
-           <p class="message-card-title">
-            client statement:
-            <blockquote class="contact-statement">
-             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi molestiae doloribus, eum dignissimos similique excepturi eos non praesentium, odio corporis, quas accusamus! Quis maiores dicta magni, sapiente ea sunt tenetur?
-            </blockquote>
-          </p>
-      </div>
-      <div class="message-card">
-        <p class="message-card-title "> client Name: <span class="contact-name">natty</span></p>
-        <p class="message-card-title"> client email: <span class="contact-email">natnael70a@gmail.com</span></p>
-        <p class="message-card-title">client address: <span class="contact-address">Addis Ababa University</span></p>
-        <p class="message-card-title">client subject: <span class="contact-subject"> Lorem ipsum dolor si</span></p>
-         <p class="message-card-title">
-          client statement:
-          <blockquote class="contact-statement">
-           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi molestiae doloribus, eum dignissimos similique excepturi eos non praesentium, odio corporis, quas accusamus! Quis maiores dicta magni, sapiente ea sunt tenetur?
-          </blockquote>
-        </p>
-    </div>
-    <div class="message-card">
-      <p class="message-card-title "> client Name: <span class="contact-name">natty</span></p>
-      <p class="message-card-title"> client email: <span class="contact-email">natnael70a@gmail.com</span></p>
-      <p class="message-card-title">client address: <span class="contact-address">Addis Ababa University</span></p>
-      <p class="message-card-title">client subject: <span class="contact-subject"> Lorem ipsum dolor si</span></p>
+
+    const response = await fetch("http://127.0.0.1:4000/messages");
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    let messageHtml = "";
+    data.forEach((message) => {
+      messageHtml += `<div class="message-card">
+      <p class="message-card-title "> client Name: <span class="contact-name">${message.clientName}</span></p>
+      <p class="message-card-title"> client email: <span class="contact-email">${message.clientEmail}</span></p>
+      <p class="message-card-title">client address: <span class="contact-address">${message.clientAddress}</span></p>
+      <p class="message-card-title">client subject: <span class="contact-subject"> ${message.clientSubject}</span></p>
        <p class="message-card-title">
         client statement:
-        <blockquote class="contact-statement">
-         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi molestiae doloribus, eum dignissimos similique excepturi eos non praesentium, odio corporis, quas accusamus! Quis maiores dicta magni, sapiente ea sunt tenetur?
-        </blockquote>
+        <blockquote class="contact-statement">${message.clientStatement}</blockquote>
       </p>
-  </div>
-      </div>
+  </div>`;
+    });
+
+    const html = ` <div class="messages-box">
+    <h2> Messages </h2>
+    <div class="messages grid grid-col-2-equal">${messageHtml}</div>
     </div>
 `;
     main.innerHTML = html;
@@ -701,6 +672,92 @@ class App {
 </div>`;
     const cardForm = document.querySelector(".card-form-box");
     cardForm.innerHTML = html;
+  }
+
+  renderUser(e) {
+    if (this.selectedElement) {
+      this.selectedElement.classList.remove("active-item-2");
+      this.selectedElement.classList.remove("active-item");
+    }
+    this.selectedElement = e.currentTarget;
+    const html = ` <div class="messages-box">
+    <h2> Messages </h2>
+    <div class="users-box grid grid-col-2-equal">
+      <table class="users-table">
+          <thead>
+          <th class=""> Username</th>
+          <th class="">Email</th>
+          <th class="">password</th>
+          <th class="">status</th>
+          </thead>
+            <tbody>
+              <tr>
+              <td class="username"> natty</td>
+              <td class="email">natnael70a@gmail.com</td>
+              <td class="password">dfdfdr34</td>
+              <td class="status">PENDDING</td>
+              </tr>
+                <tr>
+                <td class="username"> bell</td>
+                <td class="email">natty50@gmail.com</td>
+                <td class="password">3e34edfdvv</td>
+                <td class="status">REJECTED</td>
+                </tr>
+               
+                <tr>
+                  <td class="username"> goog</td>
+                  <td class="email">googboog@gmail.com</td>
+                  <td class="password">psdsdd344</td>
+                  <td class="status">APPROVED</td>
+                  </tr>
+            </tbody>
+ 
+          </table>
+
+          <div class="userform">
+
+          </div>
+        </div>
+      </div> `;
+
+    main.innerHTML = html;
+    this.selectedElement.classList.add("active-item-2");
+    document
+      .querySelector(".users-table")
+      .addEventListener("click", this.renderUserForm.bind(this));
+  }
+
+  renderUserForm(e) {
+    if (e.target.closest("tbody")) {
+      console.log("ok");
+      const username = e.target
+        .closest("tr")
+        .querySelector(".username").textContent;
+      const email = e.target.closest("tr").querySelector(".email").textContent;
+      const html = `
+      <div class="form-card">
+      <h2 class="card-heading">Edit status</h2>
+       <form action="">
+       <label class="label" for="name">name:</label>
+    <input id="name" type="text" name="" value="${username}" class="input-user" disabled ></input> </br>
+     <label class="label"  for="email">Email:</label>
+     <input id="email" type="text" name="" value="${email}" class="input-user " disabled></input>
+     </br>
+       <label class="label" for="status">Status:</label>
+       <select class="select" name="" id="status">
+       <option value="">Select Status</option>
+        <option value="Pendding">Pendding</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+       </select>
+      
+       <button class="btn btn-fill status-change">Change</button>  
+   </form>
+   </div>
+   `;
+
+      document.querySelector(".userform").innerHTML = html;
+    }
   }
 }
 const app = new App();
