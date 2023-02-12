@@ -123,10 +123,14 @@ export class UsersService {
     }
     return users;
   }
-  async updateUser(id: string, updateuserDto: UpdateUserDto) {
+  async updateUser(id: string) {
     let updatedUser: IUser;
     try {
-      updatedUser = await this.userModel.findByIdAndUpdate(id, updateuserDto);
+      updatedUser = await this.userModel.findByIdAndUpdate(
+        id,
+        { status: true },
+        { new: true },
+      );
       updatedUser = await this.hashAndSave(updatedUser);
     } catch (err) {
       throw new NotFoundException('User Not Found Exception');

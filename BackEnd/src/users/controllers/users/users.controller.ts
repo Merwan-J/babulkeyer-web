@@ -26,14 +26,15 @@ export class UsersController {
   getUsersByStatus(@Param('status') status: string) {
     return this.userService.getUsersByStatus(status);
   }
+
   @Get(':id')
   getUserById(@Param('id') id: string) {
     return this.userService.getUserById(id);
   }
-  // @Patch(':id')
-  // updateUser(@Param('id') id: string, @Body() updateuserDto: UpdateUserDto) {
-  //   return this.userService.updateUser(id, updateuserDto);
-  // }
+  @Patch(':id')
+  updateUser(@Param('id') id: string) {
+    return this.userService.updateUser(id);
+  }
   @Delete(':id')
   deleteUser(@Param('id') id: string) {
     return this.userService.deleteUser(id);
