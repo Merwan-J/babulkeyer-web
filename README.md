@@ -32,8 +32,10 @@ To get access first you have to sign up and wait until you are approved. If you 
 		      Username: admin
 		      Password: admin
 
-You can find the link to the dashboard on the Frontend directory “admin-index.html” or http://localhost:3000/FrontEnd/admin-index.html.
-The main site’s link can be found on the frontend directory “index.html” or http://localhost:3000/FrontEnd/index.html
+You can find the link to the dashboard on the Frontend directory “admin-index.html” 
+		      http://localhost:3000/FrontEnd/admin-index.html.
+The main site’s link can be found on the frontend directory “index.html”
+		      http://localhost:3000/FrontEnd/index.html
 
 # Database
 For storage, we used MongoDB due to its flexibility and scalability. It’s has also supports different languages making it very accessible to developers who have different skillset, it makes it an ideal storage solution when working with a team. It’s ability to handle large volumes of data and perform analytics concurrently made it our choice. Additionally, since we don’t have too many relations in our schema it was not necessary to use a relational database.
