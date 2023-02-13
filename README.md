@@ -33,8 +33,11 @@ To get access first you have to sign up and wait until you are approved. If you 
 		      Password: admin
 
 You can find the link to the dashboard on the Frontend directory “admin-index.html” 
+
 		      http://localhost:3000/FrontEnd/admin-index.html.
+		      
 The main site’s link can be found on the frontend directory “index.html”
+
 		      http://localhost:3000/FrontEnd/index.html
 
 # Database
